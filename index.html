@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VR Horizon</title>
     <link rel="stylesheet" href="styles.css"> 
+
+    
     
 </head>
 <body>
 
 <header class="header">
-    <div class="logo"> <img src="c:\Users\franc\Desktop\sito visori\immagini\logo.png" alt="VH Horizon Logo" class="logo" style="width: 60px;"></div>
+    <div class="logo"> <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/logo.png?token=GHSAT0AAAAAAC7RTAZPM6UA3AYDQRCEFHM6Z555LMQ" alt="VH Horizon Logo" class="logo" style="width: 60px;"></div>
     <div class="title">VR HORIZON</div>
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <nav class="nav-links">
@@ -46,8 +48,8 @@
 <!-- Sezione con due immagini a sinistra e testo a destra -->
 <section id="esperienze" class="content-reverse">
     <div class="images-container">
-        <img src="c:\Users\franc\Desktop\sito visori 2\immagini\dino.jpg" alt="VR Esperienza 1">
-        <img src="c:\Users\franc\Desktop\sito visori 2\immagini\castello_controller.jpg" alt="VR Esperienza 2">
+        <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/dino.jpg?token=GHSAT0AAAAAAC7RTAZOBIC4FI7WWO37QZIGZ555MAQ" alt="VR Esperienza 1">
+        <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/castello_controller.jpg?token=GHSAT0AAAAAAC7RTAZPMMT4K3BSBHI74CSUZ555N3A" alt="VR Esperienza 2">
     </div>
     <div class="text-right">
         <h2>Esperienza Immersiva - "Il Viaggio"</h2><br><br>
@@ -57,8 +59,8 @@
 </section>
 <section class="content-reverse">
     <div class="images-container">
-        <img src="c:\Users\franc\Desktop\sito visori 2\immagini\musica.jpg" alt="VR Esperienza 1">
-        <img src="c:\Users\franc\Desktop\sito visori 2\immagini\minigolf.jpg" alt="VR Esperienza 2">
+        <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/musica.jpg?token=GHSAT0AAAAAAC7RTAZPCK33GLRHWCS6PLPSZ555MSA" alt="VR Esperienza 1">
+        <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/minigolf.jpg?token=GHSAT0AAAAAAC7RTAZO2HJEV7AMAHTVY53MZ555MTQ" alt="VR Esperienza 2">
     </div>
     <div class="text-right">
         <h2>Esperienza Interattiva - "Il Mondo a Portata di Mano"</h2><br><br>
@@ -68,8 +70,8 @@
 </section>
 <section class="content-reverse">
     <div class="images-container">
-        <img src="c:\Users\franc\Desktop\sito visori 2\immagini\superhot.jpg" alt="VR Esperienza 1">
-        <img src="c:\Users\franc\Desktop\sito visori 2\immagini\pingpong.jpg" alt="VR Esperienza 2">
+        <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/superhot.jpg?token=GHSAT0AAAAAAC7RTAZPRM5ZNU2DBOEKRRTKZ555PHA" alt="VR Esperienza 1">
+        <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/pingpong.jpg?token=GHSAT0AAAAAAC7RTAZOELFZSINFJRW4C3SAZ555PIA" alt="VR Esperienza 2">
     </div>
     <div class="text-right">
         <h2>Esperienza Dinamica - "L'Essenza della VR"</h2><br><br>
@@ -81,90 +83,201 @@
 
 <!-- Form -->
 <section id="contattaci" class="form-container">
-    <form class="form-container" id="formPrenotazione">
-        <input type="text" id="nome" name="nome" placeholder="Nome" required>
-        <input type="email" id="email" name="email" placeholder="Email" required>
+    <!-- Modulo Prenotazione -->
+    <form class="form-box" id="formPrenotazione">
+        <h2>Prenota la tua esperienza</h2>
+
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Inserisci il tuo nome" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
+
+        <label for="persone">Numero di persone (max 6)</label>
         <input type="number" id="persone" name="persone" min="1" max="6" required>
-        <input type="date" id="data" required>
-        <select id="orario"><option>Seleziona un orario disponibile</option></select>
+
+        <label for="data">Data</label>
+        <input type="date" id="data" required min="2025-02-25">
+
+        <label for="orario">Orario disponibile</label>
+        <select id="orario" required>
+            <option value="" disabled selected>Seleziona un orario</option>
+        </select>
+
         <button type="submit">Prenota</button>
     </form>
+
     <p id="messaggio"></p>
-    
-    
-     <!-- Collega il file JavaScript -->
-    <!-- Form Registrazione Evento 
-        <h2>Registrazione Evento</h2>
-        <form>
-            <label for="nome">Nome e Cognome</label>
-            <input type="text" id="nome" name="nome" required>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="partecipanti">Numero di Partecipanti (max 6)</label>
-            <select id="partecipanti" name="partecipanti" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-            </select>
-
-            <button style="margin-top: 92px;" type="submit">Registrati</button>
-        </form>
-    </div> -->
-
-    <!-- Form Contatti -->
+    <!-- Form Contatti e Social -->
     <div class="form-box">
-        <h2></h2>
-        <form>
-            
-            <div  class="social-icons-pre">
-            <div>
-                <a style="margin-top: 60px; color: black; font-family: Arial, sans-serif; text-decoration: none;" href="https://instagram.com/tuoprofilo" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
-            </div>
-            <div >
-                <a style="margin-top: 50px; color: black; font-family: Arial, sans-serif; text-decoration: none;" href="https://facebook.com/tuoprofilo" target="_blank"><i class="fab fa-facebook-f"></i>Facebook</a>
-            </div>
-            <div>
-                <a style="margin-top: 50px; color: black; font-family: Arial, sans-serif; text-decoration: none;" href="https://tiktok.com/@tuoprofilo" target="_blank"><i class="fab fa-tiktok"></i>TikTok</a>
-            </div>
+        <h2>Seguici sui social</h2>
+
+        <div class="social-icons">
+            <a href="https://instagram.com/tuoprofilo" target="_blank" class="social-link instagram">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://facebook.com/tuoprofilo" target="_blank" class="social-link facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://tiktok.com/@tuoprofilo" target="_blank" class="social-link tiktok">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
         </div>
-
-
-
-          <!--  <label for="nome-contatto">Nome e Cognome</label>
-            <input type="text" id="nome-contatto" name="nome-contatto" required>
-
-            <label for="email-contatto">Email</label>
-            <input type="email" id="email-contatto" name="email-contatto" required>
-
-            <label for="messaggio">Messaggio (max 500 caratteri)</label>
-            <textarea id="messaggio" name="messaggio" maxlength="500" oninput="updateCharCount()"></textarea>
-            <div class="char-counter" id="char-counter">0 / 500</div>
-
-            <button type="submit">Contattaci</button>-->
-        </form>
     </div>
-
 </section>
+
+<style>
+    /* Stile contenitore principale */
+    .form-container {
+    display: flex;
+    justify-content: space-between; /* Distribuisce gli elementi */
+    flex-wrap: wrap; /* Per evitare problemi su schermi piccoli */
+    gap: 20px; /* Spazio tra le box */
+}
+
+.form-box {
+    flex: 1; /* Occupa lo spazio in modo equo */
+    min-width: 300px; /* Per evitare che si restringano troppo */
+    max-width: 48%; /* Per mantenere un buon layout */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-box {
+        max-width: 100%;
+    }
+}
+
+
+    h2 {
+        font-family: Arial, sans-serif;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+        /* Stile social links */
+        .social-icons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #fff; /* 🔹 Testo bianco per leggibilità */
+        background: #222; /* 🔹 Sfondo scuro per contrasto */
+        font-family: Arial, sans-serif;
+        padding: 12px;
+        width: 200px;
+        border-radius: 8px;
+        transition: background 0.3s ease, transform 0.2s;
+    }
+
+    .social-link i {
+        margin-right: 8px;
+        font-size: 20px;
+    }
+
+    /* Effetto hover migliorato */
+    .social-link:hover {
+        background: #444;
+        transform: scale(1.05);
+    }
+
+    /* Personalizzazione colori per ogni social */
+    .instagram { background: #E4405F; }
+    .instagram:hover { background: #d13353; }
+
+    .facebook { background: #3b5998; }
+    .facebook:hover { background: #2e4475; }
+
+    .tiktok { background: #000; }
+    .tiktok:hover { background: #222; }
+
+</style>
+
+<script>
+    document.getElementById('data').addEventListener('change', function () {
+        var orarioSelect = document.getElementById('orario');
+        orarioSelect.innerHTML = '<option value="" disabled selected>Seleziona un orario</option>';
+
+        let orariDisponibili = ['10:00', '11:00', '12:00', '14:00', '15:00']; // Orari esempio
+        orariDisponibili.forEach(orario => {
+            let option = document.createElement('option');
+            option.value = orario;
+            option.textContent = orario;
+            orarioSelect.appendChild(option);
+        });
+    });
+</script>
+
 <footer class="footer">
     <div class="footer-container">
-        <img src="c:\Users\franc\Desktop\sito visori\immagini\logo.png" alt="VR Horizon Logo" class="footer-logo"> <!-- Logo a sinistra -->
-        
-        <div class="footer-center"> <!-- Centro: Titolo + Social -->
-            <h2 class="footer-title" onclick="scrollToTop()">VR HORIZON</h2>
-            <!-- Icone Social sotto il titolo -->
-            <div style="margin-left: 30px;" class="social-icons">
-                <a href="https://instagram.com/tuoprofilo" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://facebook.com/tuoprofilo" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://tiktok.com/@tuoprofilo" target="_blank"><i class="fab fa-tiktok"></i></a>
-            </div>
+        <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/logo.png?token=GHSAT0AAAAAAC7RTAZOKMVBXKHUMBZP4XWAZ555QBQ" alt="VR Horizon Logo" class="footer-logo"> <!-- Logo a sinistra -->
+        <div style="margin-left: 30px; display: flex;">
+            <a href="https://instagram.com/tuoprofilo" target="_blank" style="margin-right: 10px; color: inherit; transition: color 0.3s;">
+                <i class="fab fa-instagram" style="font-size: 24px;"></i>
+            </a>
+            <a href="https://facebook.com/tuoprofilo" target="_blank" style="margin-right: 10px; color: inherit; transition: color 0.3s;">
+                <i class="fab fa-facebook-f" style="font-size: 24px;"></i>
+            </a>
+            <a href="https://tiktok.com/@tuoprofilo" target="_blank" style="color: inherit; transition: color 0.3s;">
+                <i class="fab fa-tiktok" style="font-size: 24px;"></i>
+            </a>
         </div>
+        
 
         <div class="footer-contacts">
+            <p>Contattaci anche su WhatsApp!</p>
             <p>📞 +39 345 603 9952</p>
             <p>📞 +39 377 206 3196</p>
         </div>
