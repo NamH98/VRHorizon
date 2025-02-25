@@ -1,0 +1,198 @@
+/* ==========================
+   STILE GENERALE
+   ========================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: white;
+    color: black;
+    padding-top: 80px; /* Evita che il contenuto venga coperto dall'header fisso */
+}
+
+/* ==========================
+   HEADER RESPONSIVE
+   ========================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #333; /* Sfondo scuro */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    z-index: 1000;
+}
+
+/* Contenitore per il layout flessibile */
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+    height: 50px;
+}
+
+/* Titolo VH HORIZON */
+.site-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    flex: 1;
+    text-align: center;
+}
+
+/* Link Home */
+.home-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.home-link:hover {
+    color: #66c2ff;
+}
+
+/* ==========================
+   RESPONSIVE DESIGN
+   ========================== */
+@media (max-width: 768px) {
+    .header {
+        padding: 0 5%;
+    }
+
+    .site-title {
+        font-size: 20px;
+    }
+
+    .home-link {
+        font-size: 16px;
+    }
+}
+/* ==========================
+   STILE PRIVACY POLICY
+   ========================== */
+   .privacy-section {
+    max-width: 900px;
+    margin: 100px auto 50px;
+    padding: 20px;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.privacy-section h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.privacy-section h3 {
+    font-size: 22px;
+    margin-top: 30px;
+    color: #444;
+}
+
+.privacy-section p, .privacy-section ul {
+    font-size: 16px;
+}
+
+.privacy-section ul {
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+/* ==========================
+   FOOTER
+   ========================== */
+.footer {
+    background: #333;
+    color: white;
+    padding: 20px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo {
+    height: 50px;
+}
+
+.footer-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.footer-contacts p {
+    margin: 5px 0;
+}
+
+.social-icons img {
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* MINI FOOTER */
+.mini-footer {
+    background: #444;
+    text-align: center;
+    padding: 10px;
+}
+
+.mini-footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.mini-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================
+   RESPONSIVE DESIGN
+   ========================== */
+@media (max-width: 768px) {
+    .privacy-section {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-contacts {
+        margin-top: 10px;
+    }
+}
+/* Stile icone social */
+.social-icons {
+    margin-top: 10px;
+    margin-right: 30px;
+    }
+
+.social-icons a {
+color: white; /* Colore iniziale */
+font-size: 20px; /* Dimensione icona */
+margin: 0 8px; /* Spazio tra le icone */
+display: inline-block;
+transition: color 0.3s ease-in-out, transform 0.3s;
+}
+
+.social-icons a:hover {
+color: #aaa; /* Cambio colore al passaggio */
+transform: scale(1.2); /* Effetto zoom */
+}
