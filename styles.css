@@ -390,19 +390,21 @@ section {
 .footer {
     background: var(--footer-bg);
     color: var(--footer-text);
-    padding: 20px 10%;
 }
 
 .footer-container {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: center; /* Centra orizzontalmente tutti gli elementi */
+    align-items: center; /* Allinea verticalmente */
+    gap: 40px; /* Spazio tra logo, social e contatti */
+    flex-wrap: wrap; /* Permette di adattarsi su schermi piccoli */
+    padding: 20px;
+    width: 100%;
 }
 
 .footer-logo {
-    height: 50px;
-    flex-shrink: 0;
+    max-width: 100px;
+    height: auto;
 }
 
 .footer-title {
@@ -420,8 +422,28 @@ section {
 
 .footer-contacts {
     text-align: right;
-    min-width: 150px;
 }
+
+/* Social icons centrato */
+.social-icons-footer {
+    display: flex;
+    gap: 15px; /* Spazio tra le icone */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Stile delle icone */
+.social-icons-footer a {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.social-icons-footer a:hover {
+    color: #aaa;
+}
+
 
 .mini-footer {
     background: var(--secondary-color);
@@ -446,11 +468,11 @@ section {
     .footer-container {
         flex-direction: column;
         text-align: center;
+        gap: 20px;
     }
 
     .footer-contacts {
         text-align: center;
-        margin-top: 10px;
     }
 }
 
