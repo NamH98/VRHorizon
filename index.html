@@ -245,21 +245,6 @@
 
 </style>
 
-<script>
-    document.getElementById('data').addEventListener('change', function () {
-        var orarioSelect = document.getElementById('orario');
-        orarioSelect.innerHTML = '<option value="" disabled selected>Seleziona un orario</option>';
-
-        let orariDisponibili = ['10:00', '11:00', '12:00', '14:00', '15:00']; // Orari esempio
-        orariDisponibili.forEach(orario => {
-            let option = document.createElement('option');
-            option.value = orario;
-            option.textContent = orario;
-            orarioSelect.appendChild(option);
-        });
-    });
-</script>
-
 <footer class="footer">
     <div class="footer-container">
         <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/logo.png?token=GHSAT0AAAAAAC7RTAZOKMVBXKHUMBZP4XWAZ555QBQ" alt="VR Horizon Logo" class="footer-logo"> <!-- Logo a sinistra -->
@@ -289,43 +274,39 @@
     <a href="privacy-policy.html">Privacy e Policy</a>
 </div>
 
-
-
-
-
 <script>
 
-// Invia la prenotazione
-const webAppUrl = "https://script.google.com/macros/s/AKfycbw2J6-lCrYTLUrFLq2CRITg50HZ_AIkmKoKZypcIn2dCA8dRekROwnTVULgtzjoQ4kjxw/exec"; // Inserisci il tuo URL
+    // Invia la prenotazione
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbwwuM0l81rX8RipjHKFldt3Yzopq_R8cLfyGUbgBCQyeCLiOVRLWVDCgWrldPruwkQ2Fg/exec"; // 🔹 Inserisci il tuo URL
 
 document.addEventListener("DOMContentLoaded", function () {
     let inputData = document.getElementById("data");
     let orarioSelect = document.getElementById("orario");
 
-    // Imposta la data minima di oggi
+    // Imposta la data minima a oggi
     let oggi = new Date().toISOString().split("T")[0];
     inputData.setAttribute("min", oggi);
 
-    // Quando l'utente cambia la data, controlla se è sabato o domenica
+    // Quando cambia la data, controlla il giorno della settimana
     inputData.addEventListener("change", function () {
         let dataSelezionata = new Date(this.value);
         let giornoSettimana = dataSelezionata.getDay(); // 0 = Domenica, 6 = Sabato
 
         if (giornoSettimana !== 0 && giornoSettimana !== 6) {
             alert("Puoi prenotare solo il Sabato e la Domenica!");
-            this.value = ""; // Resetta il campo data se seleziona un giorno feriale
+            this.value = ""; // Resetta il campo data se il giorno non è valido
             return;
         }
 
-        // Mantieni il formato YYYY-MM-DD
-        let dataFormattata = this.value;
+        // 🔹 Converte la data selezionata in formato YYYYMMDD per il backend
+        let dataFormattata = this.value.replace(/-/g, "");
 
         fetch(`${webAppUrl}?data=${dataFormattata}`)
             .then(response => response.json())
             .then(data => {
                 orarioSelect.innerHTML = ""; 
-                
-                if (data.orari.length === 0) {
+
+                if (!data.orari || data.orari.length === 0) {
                     let option = document.createElement("option");
                     option.textContent = "Nessun orario disponibile";
                     orarioSelect.appendChild(option);
@@ -338,112 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                 }
             })
-            .catch(error => console.error("Errore nel caricamento degli orari:", error));
-    });
-
-    // Gestione della prenotazione
-    document.getElementById("formPrenotazione").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    let nome = document.getElementById("nome").value;
-    let email = document.getElementById("email").value;
-    let persone = document.getElementById("persone").value;
-    let dataInput = document.getElementById("data").value.replace(/-/g, ""); 
-    let orario = document.getElementById("orario").value;
-    let messaggio = document.getElementById("messaggio");
-
-    if (!orario || orario === "Nessun orario disponibile") {
-        messaggio.textContent = "Seleziona un orario disponibile!";
-        messaggio.className = "errore"; 
-        return;
-    }
-
-    
-    let formData = new FormData();
-    formData.append("nome", nome);
-    formData.append("email", email);
-    formData.append("persone", persone);
-    formData.append("data", dataInput);
-    formData.append("orario", orario);
-
-    // 🔹 LOG per il debug
-    console.log("Dati inviati:", { nome, email, persone, dataInput, orario });
-
-
-    fetch(webAppUrl, {
-        method: "POST",
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Risposta dal server:", data);
-
-        if (data.status === "slot_pieno") {
-            messaggio.textContent = `❌ Questo slot è pieno. Rimangono solo ${data.posti_rimasti} posti disponibili (capienza max: ${data.capienza_massima}).`;
-            messaggio.className = "errore";
-        } else if (data.status === "prenotazione_effettuata") {
-            messaggio.textContent = "✅ Prenotazione effettuata con successo!";
-            messaggio.className = "successo";
-            document.getElementById("formPrenotazione").reset();
-        } else {
-            messaggio.textContent = "⚠️ Errore imprevisto. Riprova.";
-            messaggio.className = "errore";
-        }
-    })
-    .catch(error => {
-        console.error("Errore nella prenotazione:", error);
-        messaggio.textContent = "❌ Errore nella prenotazione. Riprova.";
-        messaggio.className = "errore";
-    });
-});
-});
-
-
-
-
-
-
-/* document.addEventListener("DOMContentLoaded", function () {
-    let inputData = document.getElementById("data");
-    let orarioSelect = document.getElementById("orario");
-
-    // Imposta la data minima di oggi
-    let oggi = new Date().toISOString().split("T")[0];
-    inputData.setAttribute("min", oggi);
-
-    // Quando l'utente cambia la data, controlla se è sabato o domenica
-    inputData.addEventListener("change", function () {
-        let dataSelezionata = new Date(this.value);
-        let giornoSettimana = dataSelezionata.getDay(); // 0 = Domenica, 6 = Sabato
-
-        if (giornoSettimana !== 0 && giornoSettimana !== 6) {
-            alert("Puoi prenotare solo il Sabato e la Domenica!");
-            this.value = ""; // Resetta il campo data se seleziona un giorno feriale
-            return;
-        }
-
-        // Se la data è valida (sabato o domenica), carica gli orari disponibili
-        let dataFormattata = this.value.replace(/-/g, ""); 
-
-        fetch(`${webAppUrl}?data=${dataFormattata}`)
-            .then(response => response.json())
-            .then(data => {
-                orarioSelect.innerHTML = ""; 
-                
-                if (data.orari.length === 0) {
-                    let option = document.createElement("option");
-                    option.textContent = "Nessun orario disponibile";
-                    orarioSelect.appendChild(option);
-                } else {
-                    data.orari.forEach(orario => {
-                        let option = document.createElement("option");
-                        option.value = orario;
-                        option.textContent = orario;
-                        orarioSelect.appendChild(option);
-                    });
-                }
-            })
-            .catch(error => console.error("Errore nel caricamento degli orari:", error));
+            .catch(error => console.error("❌ Errore nel caricamento degli orari:", error));
     });
 
     // Gestione della prenotazione
@@ -453,13 +329,19 @@ document.addEventListener("DOMContentLoaded", function () {
         let nome = document.getElementById("nome").value;
         let email = document.getElementById("email").value;
         let persone = document.getElementById("persone").value;
-        let dataInput = document.getElementById("data").value.replace(/-/g, ""); 
+        let dataInput = new Date(document.getElementById("data").value);
+        
+        // 🔹 Converte la data in YYYYMMDD per l'invio
+        let dataFormattata = dataInput.getFullYear().toString() + 
+                     ("0" + (dataInput.getMonth() + 1)).slice(-2) + 
+                     ("0" + dataInput.getDate()).slice(-2);
+
         let orario = document.getElementById("orario").value;
         let messaggio = document.getElementById("messaggio");
 
         if (!orario || orario === "Nessun orario disponibile") {
-            messaggio.textContent = "Seleziona un orario disponibile!";
-            messaggio.className = "errore"; // Aggiunge classe errore
+            messaggio.textContent = "❌ Seleziona un orario disponibile!";
+            messaggio.className = "errore"; 
             return;
         }
 
@@ -467,38 +349,39 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("nome", nome);
         formData.append("email", email);
         formData.append("persone", persone);
-        formData.append("data", dataInput);
+        formData.append("data", dataFormattata); // 🔹 Invia la data come YYYYMMDD
         formData.append("orario", orario);
+
+        // 🔹 LOG per il debug
+        console.log("Dati inviati:", { nome, email, persone, dataFormattata, orario });
 
         fetch(webAppUrl, {
             method: "POST",
             body: formData,
         })
-        
         .then(response => response.json())
-.then(data => {
-    console.log("Risposta dal server:", data);
+        .then(data => {
+            console.log("Risposta dal server:", data);
 
-    if (data.status === "slot_pieno") {
-        messaggio.textContent = `❌ Questo slot è pieno. Rimangono solo ${data.posti_rimasti} posti disponibili (capienza max: ${data.capienza_massima}).`;
-        messaggio.className = "errore";
-    } else if (data.status === "prenotazione_effettuata") {
-        messaggio.textContent = "✅ Prenotazione effettuata con successo!";
-        messaggio.className = "successo";
-        document.getElementById("formPrenotazione").reset();
-    } else {
-        messaggio.textContent = "⚠️ Errore imprevisto. Riprova.";
-        messaggio.className = "errore";
-    }
-})
-.catch(error => {
-    console.error("Errore nella prenotazione:", error);
-    messaggio.textContent = "❌ Errore nella prenotazione. Riprova.";
-    messaggio.className = "errore";
-});
+            if (data.status === "slot_pieno") {
+                messaggio.textContent = `❌ Questo slot è pieno. Rimangono solo ${data.posti_rimasti} posti disponibili (capienza max: ${data.capienza_massima}).`;
+                messaggio.className = "errore";
+            } else if (data.status === "prenotazione_effettuata") {
+                messaggio.textContent = "✅ Prenotazione effettuata con successo!";
+                messaggio.className = "successo";
+                document.getElementById("formPrenotazione").reset();
+            } else {
+                messaggio.textContent = "⚠️ Errore imprevisto. Riprova.";
+                messaggio.className = "errore";
+            }
+        })
+        .catch(error => {
+            console.error("❌ Errore nella prenotazione:", error);
+            messaggio.textContent = "❌ Errore nella prenotazione. Riprova.";
+            messaggio.className = "errore";
+        });
     });
 });
-*/
 
 
 function toggleMenu() {
@@ -528,8 +411,8 @@ function toggleMenu() {
     function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll fluido all'header
     }
-
-</script>
+    
+    </script>
 
 </body>
 </html>
