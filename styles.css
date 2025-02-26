@@ -225,9 +225,7 @@ section {
     display: flex;
     flex-direction: row; /* Dispone gli elementi orizzontalmente */
     justify-content: center; /* Centra orizzontalmente gli elementi */
-    align-items: center; /* Centra verticalmente gli elementi */
     flex-wrap: wrap; /* Permette il ritorno a capo se necessario */
-    gap: 20px;
     background: var(--bg-light);
     padding: 20px;
     border-radius: var(--border-radius);
@@ -235,6 +233,7 @@ section {
     max-width: 800px;
     margin: auto;
     text-align: center; /* Centra il testo all'interno dei form */
+    
 }
 
 
