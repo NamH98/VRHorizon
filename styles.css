@@ -206,16 +206,20 @@ section {
 /* Form */
 .form-container {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: row; /* Dispone gli elementi orizzontalmente */
+    justify-content: center; /* Centra orizzontalmente gli elementi */
+    align-items: center; /* Centra verticalmente gli elementi */
+    flex-wrap: wrap; /* Permette il ritorno a capo se necessario */
     gap: 20px;
     background: var(--bg-light);
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 800px;
     margin: auto;
+    text-align: center; /* Centra il testo all'interno dei form */
 }
+
 
 .form-box {
     flex: 1;
@@ -225,6 +229,7 @@ section {
     border: 1px solid #ccc;
     border-radius: var(--border-radius);
     background: #f9f9f9;
+    
 }
 
 .form-box h2 {
@@ -430,4 +435,24 @@ section {
         text-align: center;
         margin-top: 10px;
     }
+}
+
+a.phone-link {
+    color: rgb(0, 155, 26); /* Cambia colore */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+a.phone-link:hover {
+    color: rgb(139, 139, 139); /* Cambia colore al passaggio del mouse */
+}
+
+a.mail-link {
+    color: rgb(0, 85, 155); /* Cambia colore */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+a.mail-link:hover {
+    color: rgb(139, 139, 139); /* Cambia colore al passaggio del mouse */
 }
