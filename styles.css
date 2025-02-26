@@ -10,7 +10,7 @@ body {
     font-family: Arial, sans-serif;
     padding-top: 70px; /* Padding per header fisso */
     color: var(--text-light);
-    background: linear-gradient(to top, #8d8d8d, #cecece); /* Gradiente da un colore all'altro */
+    background: linear-gradient(to top, #c5c5c5, #ececec); /* Gradiente da un colore all'altro */
       
 }
 
