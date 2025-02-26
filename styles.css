@@ -214,25 +214,28 @@
         /* Form */
         .form-container {
             display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 50px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+            justify-content: space-between; /* Distribuisce gli elementi */
+            flex-wrap: wrap; /* Per evitare problemi su schermi piccoli */
+            gap: 20px; /* Spazio tra le box */
         }
-
+        
         .form-box {
-            background: #f4f4f4;
+            flex: 1; /* Occupa lo spazio in modo equo */
+            min-width: 300px; /* Per evitare che si restringano troppo */
+            max-width: 48%; /* Per mantenere un buon layout */
             padding: 20px;
-            border-radius: 10px;
-            width: 48%;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #f9f9f9;
         }
 
         .form-box h2 {
             margin-bottom: 15px;
             color: #222;
             text-align: center;
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin-bottom: 15px;
         }
 
         .form-box label {
@@ -240,6 +243,7 @@
             font-size: 14px;
             margin-top: 10px;
             font-weight: bold;
+            text-align: left;
         }
 
         .form-box input, .form-box select, .form-box textarea {
@@ -259,19 +263,19 @@
         .form-box button {
             display: block;
             width: 100%;
-            background: #222;
+            background: #007bff;
             color: white;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 5px;
-            margin-top: 15px;
+            margin-top: 10px;
             font-size: 16px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background 0.3s ease;
         }
 
         .form-box button:hover {
-            background: #444;
+            background: #0056b3;
         }
 
         .form-container {
@@ -353,7 +357,7 @@
             }
 
             .form-box {
-                width: 90%;
+                width: 100%;
                
             }
         }
@@ -384,9 +388,13 @@
     }
 
         /* Stile icone social */
-            .social-icons {
-                margin-top: 10px;
-                margin-right: 30px;
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            margin-right: 30px;
             }
 
         .social-icons a {
@@ -402,8 +410,44 @@
             transform: scale(1.2); /* Effetto zoom */
         }
 
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff; /* 🔹 Testo bianco per leggibilità */
+            background: #222; /* 🔹 Sfondo scuro per contrasto */
+            font-family: Arial, sans-serif;
+            padding: 12px;
+            width: 200px;
+            border-radius: 8px;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+    
+        .social-link i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+    
+        /* Effetto hover migliorato */
+        .social-link:hover {
+            background: #444;
+            transform: scale(1.05);
+        }
 
-                /* Footer principale */
+        .instagram { background: #E4405F; }
+        .instagram:hover { background: #d13353; }
+    
+        .facebook { background: #3b5998; }
+        .facebook:hover { background: #2e4475; }
+    
+        .tiktok { background: #000; }
+        .tiktok:hover { background: #222; }
+
+
+        /* Footer principale */
 
         .footer {
             background: #222; /* Stesso colore dell'header iniziale */
@@ -476,7 +520,3 @@
                 margin-top: 10px;
             }
         }
-
-
-
-   
