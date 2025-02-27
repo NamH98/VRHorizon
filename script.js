@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (data.status === "errore_codice_amico_non_valido") {
         messaggio.innerHTML = `
             ❌ <strong>Il codice amico inserito non esiste</strong><br>
-            Per favore, prova ad inserire un altro codice amico valido. Se non hai un codice, contatta chi ti ha invitato.<br><br>
+            Per favore, prova ad inserire un altro codice amico valido. Se non hai un codice, puoi comunque procedere senza inserirlo.<br><br>
             Grazie per la tua comprensione.
         `;
         messaggio.className = "errore";
