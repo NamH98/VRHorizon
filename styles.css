@@ -507,3 +507,33 @@ a.mail-link {
 a.mail-link:hover {
     color: rgb(139, 139, 139); /* Cambia colore al passaggio del mouse */
 }
+
+/* Stili di base per il banner cookie (per dispositivi più grandi) */
+.cc-window {
+    padding: 20px 30px !important;
+    font-size: 16px; /* Dimensione testo standard */
+    height: 210px !important; /* Altezza per schermi grandi */
+}
+
+/* Aumenta la dimensione del pulsante */
+.cc-btn {
+    padding: 12px 15px !important;
+    font-size: 16px !important;
+}
+
+/* Stili per dispositivi mobili */
+@media (max-width: 768px) {
+    .cc-window {
+        font-size: 12px; /* Riduci la dimensione del testo per mobile */
+        height: 250px !important; /* Altezza maggiore per mobile */
+    }
+
+    .cc-btn {
+        font-size: 14px !important; /* Riduci leggermente il testo del pulsante */
+        padding: 10px 12px !important;
+    }
+}
+
+
+
+

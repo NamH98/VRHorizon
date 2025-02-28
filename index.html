@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +13,6 @@
     
 </head>
 <body>
-
 <header class="header">
     <div class="logo"> <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/logo.png" alt="VH Horizon Logo" class="logo" style="width: 60px;"></div>
     <div class="title">VR HORIZON</div>
@@ -103,6 +104,9 @@
         <select id="orario" required>
             <option value="" disabled selected>Seleziona un orario</option>
         </select>
+        <label for="CodiceAmico">Codice Amico</label>
+        <input type="text" id="codiceAmico" name="codiceAmico" placeholder="Inserisci codice amico">
+        
 
         <button type="submit">Prenota</button>
     </form>
@@ -155,7 +159,47 @@
 <div  class="mini-footer">
     <a href="privacy-policy.html">Privacy e Policy</a>
 </div>
+<script>
+    window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#000"
+                },
+                "button": {
+                    "background": "#f1d600"
+                }
+            },
+            "theme": "classic",
+            "content": {
+                "message": "Questo sito utilizza i cookie per migliorare l'esperienza di navigazione e raccogliere dati analitici. <br>I cookie possono essere utilizzati per analisi statistiche, per raccogliere informazioni sulla tua navigazione rendendola anonima. <br> Cliccando su 'Accetta', acconsenti all'uso di questi cookie. Per maggiori dettagli su come gestiamo i tuoi dati, leggi la nostra",
+                "dismiss": "Accetta",
+                "link": "<strong> Privacy e Policy </strong>",
+                "href": "privacy-policy.html"
+            },
+            "onStatusChange": function(status) {
+                if (this.hasConsented()) {
+                    // Carica Google Analytics solo se l'utente ha dato il consenso
+                    var script = document.createElement('script');
+                    script.src = "https://www.googletagmanager.com/gtag/js?id=G-17Q7L3T8E4";
+                    script.async = true;
+                    document.head.appendChild(script); // Aggiungi il tag script dinamicamente
 
+                    script.onload = function() {
+                        // Inizializza Google Analytics dopo che il file è stato caricato
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-17Q7L3T8E4');
+                    }
+                } else {
+                    // Se non ha acconsentito, non caricare Google Analytics
+                    console.log("L'utente non ha acconsentito ai cookie.");
+                }
+            }
+        });
+    });
+</script>
 <script src="script.js"></script>
 
 </body>
