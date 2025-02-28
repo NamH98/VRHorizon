@@ -1,10 +1,12 @@
-
-    // Invia la prenotazione
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbxLssU-rIPVTx9pgFB0DPBQAvw7TIL6-uR6sRr_8Ag1dsMxkJK-JWmwKcJp1HmQEB_soQ/exec"; // 🔹 Inserisci il tuo URL
+// Invia la prenotazione
+const webAppUrl = "https://script.google.com/macros/s/AKfycbxLssU-rIPVTx9pgFB0DPBQAvw7TIL6-uR6sRr_8Ag1dsMxkJK-JWmwKcJp1HmQEB_soQ/exec";
 
 document.addEventListener("DOMContentLoaded", function () {
     let inputData = document.getElementById("data");
     let orarioSelect = document.getElementById("orario");
+    let bannerMessaggio = document.createElement("div");
+    bannerMessaggio.id = "bannerMessaggio";
+    document.body.appendChild(bannerMessaggio);
 
     // Imposta la data minima a oggi
     let oggi = new Date().toISOString().split("T")[0];
@@ -13,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Quando cambia la data, controlla il giorno della settimana
     inputData.addEventListener("change", function () {
         let dataSelezionata = new Date(this.value);
-        let giornoSettimana = dataSelezionata.getDay(); // 0 = Domenica, 6 = Sabato
+        let giornoSettimana = dataSelezionata.getDay();
 
         if (giornoSettimana !== 0 && giornoSettimana !== 6) {
-            alert("Puoi prenotare solo il Sabato e la Domenica!");
-            this.value = ""; // Resetta il campo data se il giorno non è valido
+            mostraBannerMessaggio("errore", "Puoi prenotare solo il Sabato e la Domenica!");
+            this.value = "";
             return;
         }
 
@@ -27,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(`${webAppUrl}?data=${dataFormattata}`)
             .then(response => response.json())
             .then(data => {
-                orarioSelect.innerHTML = ""; 
+                orarioSelect.innerHTML = "";
 
                 if (!data.orari || data.orari.length === 0) {
                     let option = document.createElement("option");
@@ -51,21 +53,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let nome = document.getElementById("nome").value;
         let email = document.getElementById("email").value;
-        let persone = document.getElementById("persone").value;
+        let persone = document.getElementById("persone").value; 
         let dataInput = new Date(document.getElementById("data").value);
-        
+
         // 🔹 Converte la data in YYYYMMDD per l'invio
         let dataFormattata = dataInput.getFullYear().toString() + 
-                     ("0" + (dataInput.getMonth() + 1)).slice(-2) + 
-                     ("0" + dataInput.getDate()).slice(-2);
-
+                             ("0" + (dataInput.getMonth() + 1)).slice(-2) + 
+                             ("0" + dataInput.getDate()).slice(-2);
         let orario = document.getElementById("orario").value;
-        let codiceAmico = document.getElementById("codiceAmico").value;  // Raccogliamo il codice amico
-        let messaggio = document.getElementById("messaggio");
+        let codiceAmico = document.getElementById("codiceAmico").value; // Raccogliamo il codice amico
 
         if (!orario || orario === "Nessun orario disponibile") {
-            messaggio.textContent = "❌ Seleziona un orario disponibile!";
-            messaggio.className = "errore"; 
+            mostraBannerMessaggio("errore", "❌ Seleziona un orario disponibile!");
             return;
         }
 
@@ -77,57 +76,55 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("orario", orario);
         formData.append("codiceAmico", codiceAmico);
 
-        // 🔹 LOG per il debug
-        console.log("Dati inviati:", { nome, email, persone, dataFormattata, orario, codiceAmico });
-
         fetch(webAppUrl, {
             method: "POST",
             body: formData,
         })
         .then(response => response.json())
         .then(data => {
-            console.log("Risposta dal server:", data);
-
             if (data.status === "slot_pieno") {
-                messaggio.innerHTML = `
-    ❌ <strong>Questo slot è già pieno</strong><br>
-    Attualmente, sono disponibili solo <span style="font-weight: bold; color: #ff0000;">${data.posti_rimasti}</span> posti 
-    (Capienza massima: <span style="font-weight: bold; color: #ff0000;">${data.capienza_massima}</span>).
-    <br><br>Ci scusiamo per l'inconveniente e ti invitiamo a scegliere un altro orario per la tua prenotazione.
-    <br><br>Grazie per la tua comprensione.
-`;
-           
-                messaggio.className = "errore";
+                mostraBannerMessaggio("errore", `❌ <strong>Questo slot è già pieno</strong><br> Attualmente, sono disponibili solo <span style="font-weight: bold; color:rgb(219, 219, 219);">${data.posti_rimasti}</span> posti (Capienza massima: <span style="font-weight: bold; color:rgb(219, 219, 219);">${data.capienza_massima}</span>). <br><br>Ci scusiamo per l'inconveniente e ti invitiamo a scegliere un altro orario per la tua prenotazione. <br><br>Grazie per la tua comprensione.`);
             } else if (data.status === "prenotazione_effettuata") {
-                messaggio.innerHTML = `
-    ✅ <strong>Prenotazione effettuata con successo!</strong><br>
-    Controlla la tua <span style="font-weight: bold;">mail</span> per confermare la prenotazione.<br>
-    Se non la trovi, verifica anche nella cartella <span style="font-weight: bold;">Spam</span>!<br><br>
-    Grazie per aver scelto il nostro servizio! 😊<br>
-    <small style="font-style: italic; color: #888;">Ti ricordiamo che la conferma potrebbe richiedere qualche minuto.</small>
-`;
-                messaggio.className = "successo";
+                mostraBannerMessaggio("successo", "✅ <strong>Prenotazione effettuata con successo!</strong><br> Controlla la tua mail per confermare la prenotazione.<br> Se non la trovi, verifica anche nella cartella Spam!<br><br> Grazie per aver scelto il nostro servizio! 😊<br> <small> Ti ricordiamo che la conferma potrebbe richiedere qualche minuto.</small>");
                 document.getElementById("formPrenotazione").reset();
             } else if (data.status === "errore_codice_amico_non_valido") {
-        messaggio.innerHTML = `
-            ❌ <strong>Il codice amico inserito non esiste</strong><br>
-            Per favore, prova ad inserire un altro codice amico valido. Se non hai un codice, puoi comunque procedere senza inserirlo.<br><br>
-            Grazie per la tua comprensione.
-        `;
-        messaggio.className = "errore";
-    } else {
-        messaggio.textContent = "⚠️ Errore imprevisto. Riprova.";
-        messaggio.className = "errore";
-    }
-})
+                mostraBannerMessaggio("errore", "❌ <strong>Il codice amico inserito non esiste</strong><br> Per favore, prova ad inserire un altro codice amico valido. Se non hai un codice, puoi comunque procedere senza inserirlo.<br><br> Grazie per la tua comprensione.");
+            } else {
+                mostraBannerMessaggio("errore", "⚠️ Errore imprevisto. Riprova.");
+            }
+        })
         .catch(error => {
             console.error("❌ Errore nella prenotazione:", error);
-            messaggio.textContent = "❌ Errore nella prenotazione. Riprova.";
-            messaggio.className = "errore";
+            mostraBannerMessaggio("errore", "❌ Errore nella prenotazione. Riprova.");
         });
     });
 });
+
+function mostraBannerMessaggio(tipo, testo) {
+    let banner = document.getElementById("bannerMessaggio");
+    banner.innerHTML = testo;
+    banner.className = tipo;
+    banner.style.position = "fixed";
+    banner.style.top = "-100px";
+    banner.style.left = "50%";
+    banner.style.transform = "translateX(-50%)";
+    banner.style.width = "90%";
+    banner.style.maxWidth = "400px";
+    banner.style.padding = "15px";
+    banner.style.textAlign = "center";
+    banner.style.fontWeight = "bold";
+    banner.style.borderRadius = "8px";
+    banner.style.transition = "top 0.5s ease-in-out";
+    banner.style.zIndex = "1000";
+    banner.style.color = "white";
+    banner.style.backgroundColor = tipo === "successo" ? "#4CAF50" : "#9c2424";
     
+    banner.style.top = "10px";
+    setTimeout(() => {
+        banner.style.top = "-300px";
+    }, 8000);
+}
+       
     
     function toggleMenu() {
             document.querySelector('.nav-links').classList.toggle('show');
