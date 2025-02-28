@@ -507,3 +507,16 @@ a.mail-link {
 a.mail-link:hover {
     color: rgb(139, 139, 139); /* Cambia colore al passaggio del mouse */
 }
+
+/* Aumenta l'altezza del banner dei cookie */
+.cc-window {
+    padding: 20px 10px !important; /* Aggiungi più spazio sopra e sotto il testo */
+    font-size: 16px; /* Modifica la dimensione del testo per l'aspetto */
+    height: 150px !important; /* Imposta un'altezza fissa */
+}
+
+/* Aumenta la dimensione del pulsante */
+.cc-btn {
+    padding: 10px 10px !important; /* Aumenta le dimensioni del pulsante */
+    font-size: 14px !important; /* Modifica la dimensione del testo del pulsante */;
+}
