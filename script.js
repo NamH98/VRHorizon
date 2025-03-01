@@ -1,5 +1,5 @@
 // Invia la prenotazione
-const webAppUrl = "https://script.google.com/macros/s/AKfycbxLssU-rIPVTx9pgFB0DPBQAvw7TIL6-uR6sRr_8Ag1dsMxkJK-JWmwKcJp1HmQEB_soQ/exec";
+const webAppUrl = "https://script.google.com/macros/s/AKfycbxlQW-b0XwZItz25APl7uG9pNRc0oo3rDWWMN5qhm_lIW8s15v9HXHl5PE2NMxWC0beKA/exec";
 
 document.addEventListener("DOMContentLoaded", function () {
     let inputData = document.getElementById("data");
