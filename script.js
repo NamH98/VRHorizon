@@ -4,9 +4,23 @@ const webAppUrl = "https://script.google.com/macros/s/AKfycbxLssU-rIPVTx9pgFB0DP
 document.addEventListener("DOMContentLoaded", function () {
     let inputData = document.getElementById("data");
     let orarioSelect = document.getElementById("orario");
+
+    // Crea il banner messaggio
     let bannerMessaggio = document.createElement("div");
     bannerMessaggio.id = "bannerMessaggio";
     document.body.appendChild(bannerMessaggio);
+
+    // Crea l'overlay di caricamento e lo NASCONDE inizialmente
+    let loadingOverlay = document.createElement("div");
+    loadingOverlay.id = "loadingOverlay";
+    loadingOverlay.style.display = "none"; // 🔹 Nascondi appena si carica la pagina
+    loadingOverlay.innerHTML = `
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Stiamo elaborando la tua prenotazione...</p>
+        </div>
+    `;
+    document.body.appendChild(loadingOverlay);
 
     // Imposta la data minima a oggi
     let oggi = new Date().toISOString().split("T")[0];
@@ -51,20 +65,23 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("formPrenotazione").addEventListener("submit", function(event) {
         event.preventDefault();
 
+        // 🔹 Mostra l'overlay SOLO quando l'utente invia il modulo
+        document.getElementById("loadingOverlay").style.display = "flex";
+
         let nome = document.getElementById("nome").value;
         let email = document.getElementById("email").value;
         let persone = document.getElementById("persone").value; 
         let dataInput = new Date(document.getElementById("data").value);
+        let orario = document.getElementById("orario").value;
+        let codiceAmico = document.getElementById("codiceAmico").value;
 
-        // 🔹 Converte la data in YYYYMMDD per l'invio
         let dataFormattata = dataInput.getFullYear().toString() + 
                              ("0" + (dataInput.getMonth() + 1)).slice(-2) + 
                              ("0" + dataInput.getDate()).slice(-2);
-        let orario = document.getElementById("orario").value;
-        let codiceAmico = document.getElementById("codiceAmico").value; // Raccogliamo il codice amico
 
         if (!orario || orario === "Nessun orario disponibile") {
             mostraBannerMessaggio("errore", "❌ Seleziona un orario disponibile!");
+            document.getElementById("loadingOverlay").style.display = "none"; // 🔹 Nasconde il messaggio di caricamento se c'è un errore
             return;
         }
 
@@ -72,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("nome", nome);
         formData.append("email", email);
         formData.append("persone", persone);
-        formData.append("data", dataFormattata); // 🔹 Invia la data come YYYYMMDD
+        formData.append("data", dataFormattata);
         formData.append("orario", orario);
         formData.append("codiceAmico", codiceAmico);
 
@@ -82,6 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
+            document.getElementById("loadingOverlay").style.display = "none"; // 🔹 Nasconde l'overlay dopo la risposta
+
             if (data.status === "slot_pieno") {
                 mostraBannerMessaggio("errore", `❌ <strong>Questo slot è già pieno</strong><br> Attualmente, sono disponibili solo <span style="font-weight: bold; color:rgb(219, 219, 219);">${data.posti_rimasti}</span> posti (Capienza massima: <span style="font-weight: bold; color:rgb(219, 219, 219);">${data.capienza_massima}</span>). <br><br>Ci scusiamo per l'inconveniente e ti invitiamo a scegliere un altro orario per la tua prenotazione. <br><br>Grazie per la tua comprensione.`);
             } else if (data.status === "prenotazione_effettuata") {
@@ -96,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("❌ Errore nella prenotazione:", error);
             mostraBannerMessaggio("errore", "❌ Errore nella prenotazione. Riprova.");
+            document.getElementById("loadingOverlay").style.display = "none"; // 🔹 Nasconde l'overlay in caso di errore
         });
     });
 });
