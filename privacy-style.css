@@ -1,256 +1,141 @@
-/* ==========================
-   STILE GENERALE
-   ========================== */
-/* Global Styles */
-* {
-    margin: 5;
-    padding: 5;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
+/* Stile base */
 body {
     font-family: Arial, sans-serif;
-    padding-top: 70px;
-    color: var(--text-light);
-    position: relative; /* Necessario per il posizionamento del livello sfocato */
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
+/* Stile per l'header */
 
-body::before {
-    content: "";
-    position: fixed; /* Fissa lo sfondo in posizione */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/Sfondo.jpg') center/cover no-repeat;
-    filter: blur(8px); /* Effetto di sfocatura */
-    z-index: -1; /* Manda lo sfondo dietro al contenuto */
-}
-
-
-
-/* Colori globali */
-:root {
-    --primary-color: #222;
-    --secondary-color: #444;
-    --highlight-color: #007bff;
-    --bg-light: #f5f5f5;
-    --bg-dark: #333;
-    --footer-bg: #222;
-    --footer-text: white;
-    --hover-color: #555;
-    --hover-bg: #ddd;
-    --border-radius: 8px;
-    --text-light: #555;
-    --text-dark: #222;
-}
-body {
-    background: white;
-    color: black;
-    padding-top: 80px; /* Evita che il contenuto venga coperto dall'header fisso */
-}
-
-/* ==========================
-   HEADER RESPONSIVE
-   ========================== */
+/* HEADER */
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
+    background-color: #333;
+    padding: 15px 30px;
     width: 100%;
-    height: 70px;
-    background: #333; /* Sfondo scuro */
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10%;
-    z-index: 1000;
+    box-sizing: border-box;
 }
 
-/* Contenitore per il layout flessibile */
-.container {
-    width: 100%;
+.header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo a sinistra, titolo al centro, link a destra */
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 /* Logo */
 .logo {
-    height: 50px;
+    width: 80px; /* Modifica la dimensione del logo */
+    height: auto;
 }
 
 /* Titolo VH HORIZON */
 .site-title {
-    font-size: 22px;
+    color: #f4f4f4;
+    font-size: 24px;
     font-weight: bold;
-    text-transform: uppercase;
-    flex: 1;
     text-align: center;
+    flex-grow: 1;  /* Il titolo si espande per restare centrato */
 }
 
 /* Link Home */
+nav {
+    display: flex;
+    align-items: center;
+}
+
 .home-link {
     color: white;
     text-decoration: none;
     font-size: 18px;
+    padding: 10px 15px;
+    background-color: #444;
+    border-radius: 5px;
     transition: 0.3s;
 }
 
 .home-link:hover {
-    color: #66c2ff;
+    background-color: #666;
 }
 
-/* ==========================
-   RESPONSIVE DESIGN
-   ========================== */
-@media (max-width: 768px) {
-    .header {
-        padding: 0 5%;
-    }
 
-    .site-title {
-        font-size: 20px;
-    }
 
-    .home-link {
-        font-size: 16px;
-    }
-}
-/* ==========================
-   STILE PRIVACY POLICY
-   ========================== */
-   .privacy-section {
-    max-width: 900px;
-    margin: 100px auto 50px;
-    padding: 20px;
-    text-align: justify;
-    line-height: 1.8;
-}
-
-.privacy-section h2 {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.privacy-section h3 {
-    font-size: 22px;
-    margin-top: 30px;
-    color: #444;
-}
-
-.privacy-section p, .privacy-section ul {
-    font-size: 16px;
-}
-
-.privacy-section ul {
-    margin-left: 20px;
-    padding-left: 20px;
-}
-
-/* ==========================
-   FOOTER
-   ========================== */
-.footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-}
-
-.footer-container {
+/* PRIVACY SECTION */
+.privacy-container {
+    flex: 1;
     display: flex;
-    justify-content: center; /* Centra orizzontalmente tutti gli elementi */
-    align-items: center; /* Allinea verticalmente */
-    gap: 40px; /* Spazio tra logo, social e contatti */
-    flex-wrap: wrap; /* Permette di adattarsi su schermi piccoli */
-    padding: 20px;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Rimuovi il padding per evitare la cornice bianca */
 }
 
+.privacy-box {
+    background: white;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ACCORDION */
+.accordion-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.accordion-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-btn i {
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-left: 10px;
+}
+
+/* FOOTER */
+.footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+}
+
+
+/* Stile per il logo nel footer */
 .footer-logo {
-    max-width: 100px;
+    width: 100px;  /* Modifica questa dimensione a piacere */
     height: auto;
 }
 
-.footer-title {
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s;
-    flex-grow: 1;
-    text-align: center;
-}
 
-.footer-title:hover {
-    color: var(--hover-bg);
-}
-
-.footer-contacts {
-    text-align: right;
-}
-
-
-/* MINI FOOTER */
-.mini-footer {
-    background: #444;
-    text-align: center;
-    padding: 10px;
-}
-
-.mini-footer a {
+.social-icons a, .social-icons-pre a {
     color: white;
-    text-decoration: none;
+    font-size: 20px;
+    margin: 0 8px;
+    display: inline-block;
+    transition: color 0.3s, transform 0.3s;
 }
 
-.mini-footer a:hover {
-    text-decoration: underline;
-}
-
-/* ==========================
-   RESPONSIVE DESIGN
-   ========================== */
-@media (max-width: 768px) {
-    .privacy-section {
-        max-width: 90%;
-        padding: 15px;
-    }
-
-    .footer {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-contacts {
-        margin-top: 10px;
-    }
-}
-/* Stile icone social */
-.social-icons {
-    margin-top: 10px;
-    margin-right: 30px;
-    }
-
-.social-icons a {
-color: white; /* Colore iniziale */
-font-size: 20px; /* Dimensione icona */
-margin: 0 8px; /* Spazio tra le icone */
-display: inline-block;
-transition: color 0.3s ease-in-out, transform 0.3s;
-}
-
-.social-icons a:hover {
-color: #aaa; /* Cambio colore al passaggio */
-transform: scale(1.2); /* Effetto zoom */
-}
-
-a.phone-link {
-    color: rgb(190, 190, 190); /* Cambia colore */
-    text-decoration: none; /* Rimuove la sottolineatura */
-    font-weight: bold; /* Testo in grassetto */
-}
-
-a.phone-link:hover {
-    color: rgb(139, 139, 139); /* Cambia colore al passaggio del mouse */
+.social-icons a:hover, .social-icons-pre a:hover {
+    color: #686868;
+    transform: scale(1.2);
 }
