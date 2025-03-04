@@ -16,24 +16,26 @@ window.addEventListener("load", function(){
             "href": "privacy-policy.html"
         },
         "onStatusChange": function(status) {
-            if (this.hasConsented()) {
-                // Carica Google Analytics solo se l'utente ha dato il consenso
-                var script = document.createElement('script');
-                script.src = "https://www.googletagmanager.com/gtag/js?id=G-17Q7L3T8E4";
-                script.async = true;
-                document.head.appendChild(script); // Aggiungi il tag script dinamicamente
+    console.log("Status del consenso: ", status); // Aggiungi il log per verificare il valore
+    if (this.hasConsented()) {
+        console.log("L'utente ha acconsentito ai cookie.");
+        // Carica Google Analytics solo se l'utente ha dato il consenso
+        var script = document.createElement('script');
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-17Q7L3T8E4";
+        script.async = true;
+        document.head.appendChild(script); // Aggiungi il tag script dinamicamente
 
-                script.onload = function() {
-                    // Inizializza Google Analytics dopo che il file è stato caricato
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', 'G-17Q7L3T8E4');
-                }
-            } else {
-                // Se non ha acconsentito, non caricare Google Analytics
-                console.log("L'utente non ha acconsentito ai cookie.");
-            }
+        script.onload = function() {
+            // Inizializza Google Analytics dopo che il file è stato caricato
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-17Q7L3T8E4');
         }
+    } else {
+        console.log("L'utente non ha acconsentito ai cookie.");
+    }
+}
+
     });
 });
