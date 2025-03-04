@@ -55,7 +55,7 @@
 .nav-links {
     display: flex;
     gap: 15px;
-    margin-right: 10px;
+    margin-right: 40px;
 }
 
 .nav-links a {
@@ -163,7 +163,7 @@ body {
     border-radius: 5px;
 }
 .modal {
-    display: none;
+    display: flex;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -284,4 +284,47 @@ body.modal-open {
         max-height: 300px;
         
     }
+}
+
+/* Stili per il carosello */
+.modal-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 600px;  /* Puoi regolare la larghezza massima */
+    margin: 0 auto;
+    overflow: hidden;  /* Nasconde le immagini e i video che escono fuori */
+}
+
+.carousel-content {
+    display: flex;
+    transition: transform 0.5s ease;  /* Aggiunge una transizione morbida */
+}
+
+.carousel-content img,
+.carousel-content video {
+    max-width: 100%;
+    max-height: 400px; /* Imposta un'altezza fissa per le immagini/video */
+    object-fit: contain;  /* Mantieni l'aspect ratio senza deformare */
+    border-radius: 8px;
+    flex-shrink: 0;  /* Impedisce che le immagini si ridimensionino */
+}
+
+.carousel-prev, .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
 }
