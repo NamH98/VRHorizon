@@ -8,10 +8,10 @@ function toggleMenu() {
 function updateCharCount() {
     let textarea = document.getElementById('messaggio');
     let counter = document.getElementById('char-counter');
-    counter.textContent = textarea.value.length + " / 500";
+    counter.textContent = `${textarea.value.length} / 500`;
 }
 
-window.addEventListener("scroll", function () {
+window.addEventListener("scroll", () => {
     const header = document.querySelector(".header");
     const title = document.querySelector(".header-title"); // Seleziona il titolo
 
@@ -24,21 +24,20 @@ window.addEventListener("scroll", function () {
     }
 });
 
+// Apre il modal e imposta il contenuto dinamico del carosello
 function openModal(title, description, items = []) {
-    // Imposta il titolo e la descrizione
     document.getElementById("modalTitle").textContent = title;
     document.getElementById("modalDescription").textContent = description;
-
-    // Salva gli oggetti media
     mediaItems = items;
 
-    // Aggiungi il contenuto dinamico del carosello
+    // Pulisce il contenuto precedente del carosello
     const carouselContent = document.querySelector(".carousel-content");
-    carouselContent.innerHTML = '';  // Pulisci il contenuto precedente
+    carouselContent.innerHTML = '';
 
     // Crea gli elementi del carosello (immagini e video)
     mediaItems.forEach(item => {
         let mediaElement;
+
         if (item.type === 'image') {
             mediaElement = document.createElement('img');
             mediaElement.src = item.src;
@@ -52,18 +51,16 @@ function openModal(title, description, items = []) {
         carouselContent.appendChild(mediaElement);
     });
 
-    // Mostra il modale
-    var modal = document.getElementById("modal");
+    // Mostra il modale e disabilita lo scrolling
+    const modal = document.getElementById("modal");
     modal.classList.add("open");
 
-    // Disabilita lo scrolling dello sfondo
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "hidden"; // Disabilita lo scrolling dello sfondo
 
-    // Mostra e attiva l'overlay con transizione
-    var overlay = document.getElementById("overlay-blur");
+    const overlay = document.getElementById("overlay-blur");
     overlay.style.display = "block";
     setTimeout(() => {
-        overlay.style.opacity = "1";
+        overlay.style.opacity = "1"; // Mostra l'overlay con transizione
     }, 10);
 
     // Aggiungi listener per chiudere con ESC
@@ -73,15 +70,22 @@ function openModal(title, description, items = []) {
     showSlide(currentSlide);
 }
 
+// Chiude il modal e ferma eventuali video
 function closeModal() {
-    var modal = document.getElementById("modal");
+    const modal = document.getElementById("modal");
     modal.classList.remove("open");
 
-    // Riattiva lo scrolling
-    document.body.style.overflow = "";
+    // Ferma il video e riporta il tempo a zero
+    const videos = modal.querySelectorAll('video');
+    videos.forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+    });
+
+    document.body.style.overflow = ""; // Riabilita lo scrolling
 
     // Nasconde l'overlay con transizione
-    var overlay = document.getElementById("overlay-blur");
+    const overlay = document.getElementById("overlay-blur");
     overlay.style.opacity = "0";
     setTimeout(() => {
         overlay.style.display = "none";
@@ -91,14 +95,14 @@ function closeModal() {
     document.removeEventListener("keydown", closeOnEsc);
 }
 
-// Chiude il modale quando si preme ESC
+// Chiude il modal quando si preme ESC
 function closeOnEsc(event) {
     if (event.key === "Escape") {
         closeModal();
     }
 }
 
-// Chiude il modale cliccando fuori
+// Chiude il modal cliccando fuori
 document.getElementById("overlay-blur").addEventListener("click", closeModal);
 
 // Mostra il slide corrente nel carosello
