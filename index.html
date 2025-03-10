@@ -13,16 +13,36 @@
     
 </head>
 <body>
-<header class="header">
-    <div class="logo"> <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/logo.png" alt="VH Horizon Logo" class="logo" style="width: 60px;"></div>
-    <div class="title">VR HORIZON</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav class="nav-links">
-        <a href="#chi-siamo">Chi Siamo</a>
-        <a href="#esperienze">Le Nostre Esperienze</a>
-        <a href="#contattaci">Contattaci</a>
-    </nav>
-</header>
+    <header class="header">
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/logo.png" alt="VH Horizon Logo">
+        </div>
+        <div class="title">VR HORIZON</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav class="nav-links">
+            <a href="#chi-siamo">Chi Siamo</a>
+    
+            <div class="dropdown">
+                <a>Le Nostre Esperienze</a>
+                <div class="dropdown-content">
+                    <a href="viaggio.html">Il Viaggio</a>
+                    <a href="viaggio.html">Il Mondo a Portata di Mano</a>
+                    <a href="viaggio.html">L'Essenza del Vr</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <a>Prenota</a>
+                <div class="dropdown-content">
+                    <a href="#prenotazione1">Pomezia</a>
+                    <a href="#prenotazione2">Latina</a>
+                    <a href="#prenotazione3">Roma</a>
+                </div>
+            </div>
+    
+            <a href="#contattaci">Contattaci</a>
+        </nav>
+    </header>
 
 <!-- Sezione con testo a sinistra e immagine a destra -->
 <section id="chi-siamo" class="content">
@@ -83,9 +103,9 @@
 
 
 <!-- Form -->
-<section id="contattaci" class="form-container">
+<section  class="form-container">
     <!-- Modulo Prenotazione -->
-    <form class="form-box" id="formPrenotazione">
+    <form id="prenota" class="form-box" id="formPrenotazione">
         <h2>Prenota la tua esperienza</h2>
 
         <label for="nome">Nome</label>
@@ -114,7 +134,7 @@
     <p id="messaggio"></p>
 
     <!-- Form Contatti e Social -->
-    <div class="form-box">
+    <div id="contattaci" class="form-box">
         <h2>Seguici sui social</h2>
 
         <div class="social-icons">
