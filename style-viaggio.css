@@ -237,22 +237,26 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
+/* Modal */
 .modal {
     display: flex;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);  /* Inizialmente ridotto */
+    transform: translate(-50%, -50%) scale(0.9);  /* Modal inizialmente ridotto */
     opacity: 0;  /* Inizialmente invisibile */
     background: linear-gradient(135deg, #222, #444);
     color: white;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     width: 90%;
     max-width: 600px;
     text-align: center;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;  /* Aggiunto effetto di transizione */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 80vh;  /* Limita l'altezza del modal */
+    overflow-y: auto;  /* Permette lo scroll se il contenuto è troppo lungo */
+    position: relative;  /* Mantiene il posizionamento del tasto chiudi sotto */
 }
 
 .modal img {
@@ -296,19 +300,21 @@ body.modal-open {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Modal aperto */
 #modal.open {
     display: block;
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);  /* Modal che appare con una leggera animazione */
 }
 
+/* Tasto Chiudi */
 .close {
     background: red;
     color: white;
     padding: 10px;
     cursor: pointer;
-    margin-top: 15px;
     border-radius: 5px;
+    margin-top: 20px;  /* Tasto Chiudi sotto */
 }
 
 .nav-buttons {
@@ -351,10 +357,18 @@ body.modal-open {
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
+    body {
+        padding-top: 100px; /* Aggiungi uno spazio per evitare che l'header copra il contenuto */
+    }
+
+    /* Header */
+    .header {
+        padding: 20px 20px; /* Aumenta la spaziatura per i dispositivi mobili */
+    }
     .container {
       align-items: center;
-      margin-top: 80vh;
+      max-height: 120vh;
     }
     .card {
         max-width: 300px;
