@@ -93,6 +93,7 @@ body::before {
 .nav-links {
     display: flex;
     gap: 15px;
+
 }
 
 .nav-links a {
@@ -119,7 +120,7 @@ body::before {
         background: var(--bg-dark);
         text-align: left;
         padding: 10px;
-        border-radius: 0; /* Evita tagli agli angoli */
+        border-radius: var(--border-radius) /* Evita tagli agli angoli */
     }
 
     .nav-links.show {
