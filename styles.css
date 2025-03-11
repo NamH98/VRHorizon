@@ -608,7 +608,7 @@ a.mail-link:hover {
 
 /* Overlay di caricamento */
 #loadingOverlay {
-    display: none; /* 🔹 ORA È NASCOSTO APPENA SI APRE LA PAGINA */
+    display: flex; /* 🔹 ORA È NASCOSTO APPENA SI APRE LA PAGINA */
     position: fixed;
     top: 0;
     left: 0;
@@ -623,8 +623,17 @@ a.mail-link:hover {
 }
 
 .loading-content {
+    display: flex; /* 🔹 Usa Flexbox */
+    flex-direction: column; /* 🔹 Dispone gli elementi in colonna */
+    align-items: center; /* 🔹 Centra orizzontalmente */
+    justify-content: center; /* 🔹 Centra verticalmente */
     text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
+
 
 .spinner {
     border: 6px solid rgba(255, 255, 255, 0.3);
