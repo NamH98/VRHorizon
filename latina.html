@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.0/build/cookieconsent.min.js"></script>
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR Horizon</title>
+    <link rel="stylesheet" href="style-latina.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Favicon classico -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/NamH98/VRHorizon/blob/main/Immagini/logo-barra-index-32x32.png?raw=true">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/NamH98/VRHorizon/blob/main/Immagini/logo-barra-index-16x16.png?raw=true">
+
+    <!-- Icone per dispositivi mobili -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/NamH98/VRHorizon/blob/main/Immagini/logo-barra-index-apple-touch-icon.png?raw=true">
+
+    <!-- Icone per Android/Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="https://github.com/NamH98/VRHorizon/blob/main/Immagini/logo-barra-index-192x192.png?raw=true">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://github.com/NamH98/VRHorizon/blob/main/Immagini/logo-barra-index-512x512.png?raw=true">
+
+    
+    
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/logo.png" alt="VH Horizon Logo">
+        </div>
+        <div class="title">VR HORIZON</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav class="nav-links">
+            <a href="https://vrhorizon.it/index.html#chi-siamo">Chi Siamo</a>
+    
+            <div class="dropdown">
+                <a>Le Nostre Esperienze</a>
+                <div class="dropdown-content">
+                    <a href="https://vrhorizon.it/viaggio.html">Il Viaggio</a>
+                    <a href="https://vrhorizon.it/Interattivo.html">Il Mondo a Portata di Mano</a>
+                    <a href="https://vrhorizon.it/dinamico.html">L'Essenza del Vr</a>
+                </div>
+            </div>
+    
+            <div class="dropdown">
+                <a>Prenota</a>
+                <div class="dropdown-content">
+                    <a href="#prenotazione1">Pomezia</a>
+                    <a href="#prenotazione2">Latina</a>
+                    <a href="#prenotazione3">Roma</a>
+                </div>
+            </div>
+    
+            <a href="https://vrhorizon.it/index.html#contattaci">Contattaci</a>
+        </nav>
+
+    </header>
+    <div class="container">
+        <section class="gallery">
+            <video id="main-media" class="main-media" controls autoplay>
+                <source src="https://scontent-fco2-1.oculuscdn.com/v/t64.7195-25/57572923_857382279208784_4588908849408643711_n.mp4?_nc_cat=104&ccb=1-7&_nc_sid=b20b63&_nc_ohc=YAzwIWQT7Z4Q7kNvgEtIHMP&_nc_oc=AdglQdCTE9zseCfbY5WzJnnZEpR-cz82iLSpZ8E4h_sFGw5kwqgDaYqzz-hDSlGiCCg&_nc_zt=28&_nc_ht=scontent-fco2-1.oculuscdn.com&_nc_gid=AkxaNcCb6Vd7U4N4vJv4enV&oh=00_AYGtLwgwwU4JU8_vch-gctjpVqtIcsIdV47iQqpIj1dSHA&oe=67D4F916" type="video/mp4">
+            </video>
+            <div class="thumbnails">
+                <img src="https://github.com/NamH98/VRHorizon/blob/main/Immagini/jurassic-world-cop.jpg?raw=true" alt="Trailer" class="active" onclick="changeMedia('https://scontent-fco2-1.oculuscdn.com/v/t64.7195-25/57572923_857382279208784_4588908849408643711_n.mp4?_nc_cat=104&ccb=1-7&_nc_sid=b20b63&_nc_ohc=YAzwIWQT7Z4Q7kNvgEtIHMP&_nc_oc=AdglQdCTE9zseCfbY5WzJnnZEpR-cz82iLSpZ8E4h_sFGw5kwqgDaYqzz-hDSlGiCCg&_nc_zt=28&_nc_ht=scontent-fco2-1.oculuscdn.com&_nc_gid=AkxaNcCb6Vd7U4N4vJv4enV&oh=00_AYGtLwgwwU4JU8_vch-gctjpVqtIcsIdV47iQqpIj1dSHA&oe=67D4F916', 'video', this)">
+                <img src="https://github.com/NamH98/VRHorizon/blob/main/Immagini/beat-saber2.jpg?raw=true" alt="Foto 1" onclick="changeMedia('https://github.com/NamH98/VRHorizon/blob/main/Immagini/beat-saber2.jpg?raw=true', 'img', this)">
+                <img src="https://github.com/NamH98/VRHorizon/blob/main/Immagini/beat-saber3.jpg?raw=true" alt="Foto 2" onclick="changeMedia('https://github.com/NamH98/VRHorizon/blob/main/Immagini/beat-saber3.jpg?raw=true', 'img', this)">
+                <img src="https://github.com/NamH98/VRHorizon/blob/main/Immagini/walkabout-minigolf2.jpg?raw=true" alt="Foto 3" onclick="changeMedia('https://github.com/NamH98/VRHorizon/blob/main/Immagini/walkabout-minigolf2.jpg?raw=true', 'img', this)">
+                <img src="https://github.com/NamH98/VRHorizon/blob/main/Immagini/walkabout-minigolf3.jpg?raw=true" alt="Foto 4" onclick="changeMedia('https://github.com/NamH98/VRHorizon/blob/main/Immagini/walkabout-minigolf3.jpg?raw=true', 'img', this)">
+            </div>
+        </section>
+</div>
+
+    <section class="description-index">
+        <ul class="index-list">
+            <li><a href="#prenota">Prenota</a></li>
+        </ul>
+    </section>
+    <br>
+    
+    <section id="informazioni" class="info-section">
+        <div class="section-box">
+        <h2>Informazioni</h2>
+        <br> 
+        <br>
+        <p><strong>Data:</strong> 📅 5 - 6 Giugno 2025</p>
+        <br>
+        <p><strong>Luogo:</strong>📍 Via Possanzini 123,<strong> Latina</strong>, LT</p>
+        <br>
+        <p><strong>Durata Esperienza:</strong> 🕰️ Durata Esperienza: 25 - 30 minuti</p>
+    </div>
+    </section>
+    <br>
+
+    <div class="pricing-container">
+        <section class="pricing-section">
+            <h2>Prezzi pacchetto Viaggio! 🎉</h2>
+            <p>Puoi scegliere due esperienze su tre per il nostro pacchetto Viaggio! 👏</p>
+            <br>
+            <div class="pricing-box">
+                <p><strong>🔹 Prezzo per singolo:</strong> €15 / persona 💰</p>
+                <p><strong>🔹 Prezzo per coppia (Sconto!):</strong> €10 / persona 💑</p>
+                <br><br>
+                <p><strong>📅 Le esperienze disponibili sono:</strong></p>
+                <br><br><br>
+                <ul>
+                    <li>Jurassic Park 🦖🌴</li>
+                    <li>TripTo VR 🏝️🌍</li>
+                    <li>Space Exploration VR 🚀🌌</li>
+                </ul>
+                <br><br><br>
+                <p><strong>⚡ Potrai scegliere due esperienze tra queste per il pacchetto!</strong></p>
+            </div>
+        </section>
+        <br>
+        
+        <section class="pricing-section">
+            <h2>Prezzi pacchetto Intra! 🎉</h2>
+            <p>Puoi scegliere due esperienze su tre per il nostro pacchetto Intrattenimento! 👏</p>
+            <br>
+            <div class="pricing-box">
+                <p><strong>🔹 Prezzo per singolo:</strong> €20 / persona 💰</p>
+                <p><strong>🔹 Prezzo per coppia (Sconto!):</strong> €15 / persona 💑</p>
+                <br><br>
+                <p><strong>📅 Le esperienze disponibili sono:</strong></p>
+                <br><br><br>
+                <ul>
+                    <li>MiniGolf VR ⛳🎮</li>
+                    <li>Beat Saber VR 🎶🔪</li>
+                    <li>Iron Guard VR 🔫🛡️</li>
+                </ul>
+                <br><br><br>
+                <p><strong>⚡ Potrai scegliere due esperienze tra queste per il pacchetto!</strong></p>
+            </div>
+        </section>
+        <br>
+        
+        <section class="pricing-section">
+            <h2>Prezzi pacchetto Full Vr! 🎉</h2>
+            <p>Puoi scegliere due esperienze su tre per il nostro pacchetto Full Vr! 👏</p>
+            <br>
+            <div class="pricing-box">
+                <p><strong>🔹 Prezzo per singolo:</strong> €30 / persona💰</p>
+                <p><strong>🔹 Prezzo per coppia (Sconto!):</strong> €25 / persona 💑</p>
+                <br><br>
+                <p><strong>📅 Le esperienze disponibili sono:</strong></p>
+                <br><br><br>
+                <ul>
+                    <li>Superhot VR 🔥💥</li>
+                    <li>Table Tennis VR 🏓🎮</li>
+                    <li>V-Speedway VR 🏎️💨</li>
+                </ul>
+                <br><br><br>
+                <p><strong>⚡ Potrai scegliere due esperienze tra queste per il pacchetto!</strong></p>
+            </div>
+        </section>
+</div>
+    
+    <section id="prenota" class="booking-section">
+       <!-- Form -->
+        <section  class="form-container">
+            <!-- Modulo Prenotazione -->
+            <form class="form-box" id="formPrenotazione">
+                <h2>Prenota la tua esperienza</h2>
+            
+                <div class="input-group">
+                    <input type="text" id="nome" name="nome" placeholder="" required>
+                    <label for="nome">Nome</label>
+                </div>
+            
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="" required>
+                    <label for="email">Email</label>
+                </div>
+            
+                <div class="input-group">
+                    <input type="number" id="persone" name="persone" min="1" max="6" placeholder="" required>
+                    <label for="persone">Numero di persone (max 6)</label>
+                </div>
+            
+                <div class="input-group">
+                    <input type="date" id="data" placeholder="" required min="2025-02-25">
+                    <label for="data"></label>
+                </div>
+            
+                <div class="input-group">
+                    <select id="orario" required>
+                        <option value="" disabled selected></option>
+                    </select>
+                    <label for="orario">Orario disponibile</label>
+                </div>
+            
+                <div class="input-group">
+                    <input type="text" id="codiceAmico" name="codiceAmico" placeholder="">
+                    <label for="codiceAmico">Codice Amico</label>
+                </div>
+            
+                <button type="submit">Prenota</button>
+            </form>
+
+            <p id="messaggio"></p>
+
+            <!-- Form Contatti e Social -->
+            <div id="contattaci" class="form-box">
+                <h2>Seguici sui social</h2>
+
+                <div class="social-icons">
+                    <a href="https://instagram.com/tuoprofilo" target="_blank" class="social-link instagram">
+                        <i class="fab fa-instagram"></i>Instagram
+                    </a>
+                    <a href="https://facebook.com/tuoprofilo" target="_blank" class="social-link facebook">
+                        <i class="fab fa-facebook-f"></i>Facebook
+                    </a>
+                    <a href="https://tiktok.com/@tuoprofilo" target="_blank" class="social-link tiktok">
+                        <i class="fab fa-tiktok"></i>TikTok
+                    </a>
+                    <h3>Contattaci anche su WhatsApp!</h3>
+                    <p><a href="https://wa.me/393456039952?text=Ciao,%20vorrei%20delle%20informazioni%20riguardo%20alle%20esperienze%20in%20VR" class="phone-link">+39 345 603 9952</a></p>
+                    <p><a href="https://wa.me/393772063196?text=Ciao,%20vorrei%20delle%20informazioni%20riguardo%20alle%20esperienze%20in%20VR" class="phone-link">+39 377 206 3196</a></p>
+                    <h3>O tramite E-mail!</h3>
+                    <p> <a href="mailto:vrhorizon.eventi@gmail.com" class="mail-link">vrhorizon.eventi@gmail.com</a></p>
+                </div>
+            </div>
+        </section>
+    </section>  
+    
+          <script src="script-latina.js" defer></script>
+    </body>
+    </html>

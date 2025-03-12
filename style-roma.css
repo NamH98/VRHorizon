@@ -1,0 +1,783 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0; /* Rimuove margini indesiderati */
+    padding-top: 70px;
+    color: var(--text-light);
+    position: relative; /* Necessario per il posizionamento del livello sfocato */
+    overflow-x: hidden; /* Previene lo scroll orizzontale */
+}
+
+body::before {
+    content: "";
+    position: fixed; /* Fissa lo sfondo in posizione */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://raw.githubusercontent.com/NamH98/VRHorizon/refs/heads/main/Immagini/Sfondo.jpg') center/cover no-repeat;
+    filter: blur(8px); /* Effetto di sfocatura */
+    z-index: -1; /* Manda lo sfondo dietro al contenuto */
+}
+
+/* Colori globali */
+:root {
+    --primary-color: #222;
+    --secondary-color: #444;
+    --highlight-color: #007bff;
+    --bg-light: #f5f5f5;
+    --bg-dark: #333;
+    --footer-bg: #222;
+    --footer-text: white;
+    --hover-color: #555;
+    --hover-bg: #ddd;
+    --border-radius: 8px;
+    --text-light: #555;
+    --text-dark: #222;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: var(--bg-dark);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s, backdrop-filter 0.3s;
+}
+
+.header.scrolled {
+    background: rgba(34, 34, 34, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+.logo img {
+    width: 60px;
+}
+
+.title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+    transition: color 0.3s;
+}
+
+.header.scrolled .title {
+    color: var(--text-dark);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* MENU */
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    transition: background 0.3s;
+}
+
+.nav-links a:hover {
+    background: var(--secondary-color);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0; /* Allinea il menu a destra */
+        width: 100%; /* Occupa tutta la larghezza */
+        background: var(--bg-dark);
+        text-align: left;
+        padding: 10px;
+        border-radius: var(--border-radius);
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Dropdown mobile */
+    .dropdown {
+        width: 100%; /* Occupa tutto lo spazio disponibile */
+    }
+
+    .dropdown-content {
+        display: flex;
+        flex-direction: column;
+        background: var(--secondary-color);
+        width: 100%; /* Occupa tutta la larghezza disponibile */
+        padding: 5px 15px; /* Più spazio per il testo */
+    }
+    .dropdown-content a {
+        padding: 10px;
+        color: white;
+        white-space: nowrap; /* Impedisce il taglio del testo */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Se il testo è troppo lungo, mette i "..." */
+    }
+
+}
+
+/* Dropdown per Desktop */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--secondary-color);
+    border-radius: var(--border-radius);
+    min-width: 180px;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 8px;
+    color: white;
+}
+
+/* Forza l'allineamento verticale corretto */
+.dropdown > a {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .dropdown-content {
+        display: flex;
+        position: relative;
+        background: var(--secondary-color); /* Sfondo visibile */
+        box-shadow: none;
+        flex-direction: column;
+        width: 100%; /* Larghezza piena */
+        padding-left: 10px; /* Indentazione per distinguere */
+    }
+
+    .dropdown-content a {
+        padding: 8px 12px; /* Stessa spaziatura degli altri link */
+        color: white; /* Assicura visibilità */
+    }
+}
+
+.container {
+    margin-top: 80px; /* Sposta tutto più in basso sotto l'header */
+}
+
+/* Modifica per evitare lo scroll orizzontale */
+.gallery {
+    max-width: 100%; /* Limita la larghezza della galleria */
+    margin: auto;
+    position: relative;
+}
+
+.main-media {
+    width: auto;
+    max-width: 80%; /* Imposta la larghezza massima, ad esempio 80% della larghezza della finestra */
+    max-height: 500px; /* Aggiungi una limitazione sull'altezza */
+    margin: 0 auto; /* Centra l'immagine orizzontalmente */
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    object-fit: cover; /* Mantiene le proporzioni senza distorcere */
+}
+
+.fade-out {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.fade-in {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+    flex-wrap: wrap; /* Consente alle miniature di andare a capo */
+}
+
+.thumbnails img,
+.thumbnails video {
+    max-height: 90px; /* Aumento dell'altezza delle miniature */
+    width: auto; /* Larghezza automatica per mantenere le proporzioni */
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+
+.thumbnails img:hover,
+.thumbnails video:hover {
+    border-color: #007BFF;
+}
+
+.thumbnails img.active,
+.thumbnails video.active {
+    border-color: red;
+}
+
+
+
+
+/* Modifiche per schermi piccoli */
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 15px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .main-media {
+        max-width: 90%; /* Rende l'immagine più piccola su dispositivi mobili */
+        max-height: 300px; /* Impostare un'altezza massima per schermi piccoli */
+    }
+
+    .thumbnails img,
+    .thumbnails video {
+        max-height: 70px; /* Riduzione dell'altezza delle miniature */
+    }
+
+    .gallery-buttons button {
+        font-size: 24px; /* Riduzione della dimensione delle frecce */
+        padding: 15px;
+    }
+
+    .info-section {
+        margin-top: 20px;
+        font-size: 14px; /* Font più piccolo per testo */
+    }
+}
+
+
+.section-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Allinea tutto il testo a sinistra */    
+}
+
+/* Box per le esperienze */
+.experience-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    text-align: left; /* Allinea tutto il testo a sinistra */
+    margin: auto;
+    max-width: 70%;  
+}
+
+/* Stile per ogni esperienza */
+.experience {
+    padding: 10px 0;
+}
+
+/* Divider tra esperienze */
+.divider {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+/* Indice orizzontale */
+.description-index {
+    background: #222;
+    padding: 25px 0;
+    text-align: center;
+    border-radius: 0;
+}
+
+.index-list {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    justify-content: center; /* Allinea orizzontalmente */
+    flex-wrap: nowrap; /* Impedisce alle parole chiave di andare a capo */
+}
+
+.index-list li {
+    display: inline;
+}
+
+.index-list a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 4px;
+    white-space: nowrap; /* Evita che il testo vada a capo */
+    transition: background-color 0.3s;
+}
+
+.index-list a:hover {
+    color: #747474;
+}
+
+/* Mobile - Rendi la lista orizzontale responsiva */
+@media (max-width: 768px) {
+    .description-index {
+        padding: 10px;
+    }
+    .index-list {
+        flex-wrap: wrap; /* Consente di andare a capo su schermi piccoli */
+        justify-content: center; /* Allinea a sinistra */
+    }
+}
+
+/* Sezioni */
+section {
+    margin: auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+/* Prenotazione */
+.booking-section {
+    padding: 40px 20px;
+    background-color: #f7f7f7;
+    text-align: center;
+    margin-top: 30px;
+    margin-top: 20px;
+    max-width: 80%; 
+}
+
+.info-section {
+    padding: 40px 20px;
+    background-color: #f7f7f7;
+    text-align: center;
+    margin-top: 30px;
+    margin-top: 20px;
+    max-width: 80%; 
+}
+
+/* Assicurati che il contenuto non si sovrapponga */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Sezione prezzi */
+
+.pricing-container {
+    display: flex;
+    justify-content: center; /* Centra gli elementi */
+    gap: 20px; /* Spazio tra le card */
+    flex-wrap: wrap;
+    max-width: 80%; /* Stessa larghezza dei container sopra e sotto */
+    margin: 0 auto; /* Centra il contenitore */
+}
+
+.pricing-section {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Media Query per rimuovere il flex: 1 sui tablet */
+@media (max-width: 1024px) and (min-width: 600px) {
+    .pricing-section {
+        flex: initial; /* Rimuove flex: 1 e ripristina il comportamento di default */
+    }
+}
+
+
+.pricing-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.pricing-section p {
+    font-size: 18px;
+    color: #555;
+}
+
+.pricing-box {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+    height: 600px;
+}
+
+.pricing-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.pricing-box ul li {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.pricing-box p {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Responsività */
+@media (max-width: 768px) {
+    .pricing-section h2 {
+        font-size: 22px;
+    }
+
+    .pricing-box {
+        padding: 15px;
+    }
+
+    .pricing-box p {
+        font-size: 14px;
+    }
+
+    .pricing-box ul li {
+        font-size: 14px;
+    }
+}
+
+
+/* Form */
+.form-container {
+    display: flex;
+    flex-direction: row; /* Dispone gli elementi orizzontalmente */
+    justify-content: center; /* Centra orizzontalmente gli elementi */
+    flex-wrap: wrap; /* Permette il ritorno a capo se necessario */
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    max-width: 1000px;
+    margin: auto;
+    text-align: center; /* Centra il testo all'interno dei form */
+    
+}
+
+
+.form-box {
+    flex: 1;
+    min-width: 250px;
+    max-width: 48%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    background: #f9f9f9;
+    
+}
+
+.form-box h2 {
+    margin-bottom: 15px;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+.form-box textarea {
+    resize: none;
+    height: 100px;
+}
+
+.form-box button {
+    display: block;
+    width: 100%;
+    background: var(--highlight-color);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+
+.form-container button {
+    background: var(--text-dark);
+    color: white;
+}
+
+.form-container button:hover {
+    background: var(--hover-bg);
+    color: #000;
+}
+
+/* Messaggio di feedback */
+#messaggio {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#messaggio.successo {
+    color: green;
+}
+
+#messaggio.errore {
+    color: red;
+}
+
+.char-counter {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+}
+
+/* Social Icons */
+.social-icons, .social-icons-pre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.social-icons a, .social-icons-pre a {
+    color: white;
+    font-size: 15px;
+    margin: 0 8px;
+    display: inline-block;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-icons a:hover, .social-icons-pre a:hover {
+    color: #686868;
+    transform: scale(1.2);
+}
+
+/* Stile per i link social */
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background: var(--text-dark);
+    padding: 12px;
+    width: 200px;
+    border-radius: var(--border-radius);
+    transition: background 0.3s, transform 0.2s;
+}
+
+.social-link i {
+    margin-right: 8px;
+}
+
+.social-link:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* Colori social specifici */
+.instagram { background: #E4405F; }
+.instagram:hover { background: #d13353; }
+
+.facebook { background: #3b5998; }
+.facebook:hover { background: #2e4475; }
+
+.tiktok { background: #000; }
+.tiktok:hover { background: #222; }
+
+a.phone-link {
+    color: rgb(0, 155, 26); /* Cambia colore */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+a.phone-link:hover {
+    color: rgb(139, 139, 139); /* Cambia colore al passaggio del mouse */
+}
+
+a.mail-link {
+    color: rgb(0, 85, 155); /* Cambia colore */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    font-weight: bold; /* Testo in grassetto */
+}
+
+a.mail-link:hover {
+    color: rgb(139, 139, 139); /* Cambia colore al passaggio del mouse */
+}
+
+/* Overlay di caricamento */
+#loadingOverlay {
+    display: none; /* 🔹 ORA È NASCOSTO APPENA SI APRE LA PAGINA */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.spinner {
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top: 6px solid white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input, 
+.input-group select {
+    width: 100%;
+    padding: 14px 10px; /* Più padding per un look più pulito */
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background: transparent;
+}
+
+/* Stile base della label */
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #777;
+    transition: 0.3s ease-in-out;
+    pointer-events: none;
+    background: #f9f9f9;
+    padding: 0 5px;
+    border-radius: 40%;
+}
+
+/* Sposta la label a metà della riga superiore */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group input:not(:empty) + label,
+.input-group select:focus + label,
+.input-group select:valid + label {
+    top: -0.2px;  /* Modificato per essere più centrato */
+    left: 12px;
+    font-size: 16px; /* Non più troppo piccolo */
+    color: #007bff;
+}
+
+/* Stile focus per input e select */
+.input-group input:focus, 
+.input-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Media Queries per responsività */
+@media (max-width: 768px) {
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 12px 8px;  /* Ridurre il padding per schermi più piccoli */
+        font-size: 14px;    /* Ridurre la dimensione del testo */
+    }
+
+    .input-group label {
+        font-size: 16px; /* Ridurre la dimensione della label per dispositivi più piccoli */
+    }
+}
+
+@media (max-width: 480px) {
+    .input-group {
+        margin-bottom: 10px;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 10px 6px;  /* Ridurre ulteriormente il padding */
+        font-size: 14px;    /* Mantieni la dimensione del testo più piccola */
+    }
+
+    .input-group label {
+        font-size: 14px; /* Etichetta più piccola su schermi molto piccoli */
+    }
+}
