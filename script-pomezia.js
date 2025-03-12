@@ -62,11 +62,14 @@ let currentIndex = 0;
         }
 
         // Invia la prenotazione
-const webAppUrl = "https://script.google.com/macros/s/AKfycbxlQW-b0XwZItz25APl7uG9pNRc0oo3rDWWMN5qhm_lIW8s15v9HXHl5PE2NMxWC0beKA/exec";
+const webAppUrl = "https://script.google.com/macros/s/AKfycbxCTgvtJMTWiPcBJ4Lv3qZ2QG3SRVM3fx8cc0C28LjZ7-5Xv-Jh2piJeEDLMa7fbWdv8Q/exec";
 
 document.addEventListener("DOMContentLoaded", function () {
     let inputData = document.getElementById("data");
     let orarioSelect = document.getElementById("orario");
+
+    // Definisci la città manualmente
+    const citta = "pomezia";  // Città che viene passata manualmente nel codice
 
     // Crea il banner messaggio
     let bannerMessaggio = document.createElement("div");
@@ -103,25 +106,37 @@ document.addEventListener("DOMContentLoaded", function () {
         // 🔹 Converte la data selezionata in formato YYYYMMDD per il backend
         let dataFormattata = this.value.replace(/-/g, "");
 
-        fetch(`${webAppUrl}?data=${dataFormattata}`)
+        // Esegui la richiesta per ottenere gli orari disponibili per quella data
+        console.log(`Richiesta inviata per la data ${dataFormattata} e città ${citta}`);  // Log per debug
+        fetch(`${webAppUrl}?data=${dataFormattata}&citta=${citta}`)
             .then(response => response.json())
             .then(data => {
-                orarioSelect.innerHTML = "";
+                console.log("Risposta ricevuta:", data);  // Log per vedere la risposta dal server
 
-                if (!data.orari || data.orari.length === 0) {
-                    let option = document.createElement("option");
-                    option.textContent = "Nessun orario disponibile";
-                    orarioSelect.appendChild(option);
-                } else {
-                    data.orari.forEach(orario => {
+                // Verifica la struttura della risposta
+                if (data.orari && Array.isArray(data.orari)) {
+                    orarioSelect.innerHTML = "";  // Svuota il selettore orari
+                    if (data.orari.length === 0) {
                         let option = document.createElement("option");
-                        option.value = orario;
-                        option.textContent = orario;
+                        option.textContent = "Nessun orario disponibile";
                         orarioSelect.appendChild(option);
-                    });
+                    } else {
+                        data.orari.forEach(orario => {
+                            let option = document.createElement("option");
+                            option.value = orario;
+                            option.textContent = orario;
+                            orarioSelect.appendChild(option);
+                        });
+                    }
+                } else {
+                    console.error("Errore: la risposta dal server non contiene orari validi.");
+                    mostraBannerMessaggio("errore", "❌ Errore nel caricamento degli orari.");
                 }
             })
-            .catch(error => console.error("❌ Errore nel caricamento degli orari:", error));
+            .catch(error => {
+                console.error("❌ Errore nel caricamento degli orari:", error);
+                mostraBannerMessaggio("errore", "❌ Errore nel caricamento degli orari.");
+            });
     });
 
     // Gestione della prenotazione
@@ -155,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("data", dataFormattata);
         formData.append("orario", orario);
         formData.append("codiceAmico", codiceAmico);
+        formData.append("citta", citta);  // Aggiungi la città al formData
 
         fetch(webAppUrl, {
             method: "POST",
@@ -207,3 +223,4 @@ function mostraBannerMessaggio(tipo, testo) {
         banner.style.top = "-300px";
     }, 8000);
 }
+

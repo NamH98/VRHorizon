@@ -301,7 +301,7 @@ body::before {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Allinea tutto il testo a sinistra */    
+    text-align: center; /* Allinea tutto il testo a sinistra */    
 }
 
 /* Box per le esperienze */
@@ -338,7 +338,6 @@ body::before {
 
 .index-list {
     display: flex;
-    gap: 100px; /* Aumenta il gap tra le parole chiave */
     padding: 0;
     margin: 0;
     list-style: none;
@@ -353,7 +352,7 @@ body::before {
 .index-list a {
     text-decoration: none;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 25px;
     padding: 10px;
     border-radius: 4px;
     white-space: nowrap; /* Evita che il testo vada a capo */
@@ -371,7 +370,7 @@ body::before {
     }
     .index-list {
         flex-wrap: wrap; /* Consente di andare a capo su schermi piccoli */
-        justify-content: flex-start; /* Allinea a sinistra */
+        justify-content: center; /* Allinea a sinistra */
     }
 }
 
@@ -390,7 +389,7 @@ section {
     text-align: center;
     margin-top: 30px;
     margin-top: 20px;
-    max-width: 70%; 
+    max-width: 80%; 
 }
 
 .info-section {
@@ -399,7 +398,7 @@ section {
     text-align: center;
     margin-top: 30px;
     margin-top: 20px;
-    max-width: 70%; 
+    max-width: 80%; 
 }
 
 /* Assicurati che il contenuto non si sovrapponga */
@@ -410,14 +409,32 @@ body {
 }
 
 /* Sezione prezzi */
-.pricing-section {
-    padding: 40px 20px;
-    background-color: #f7f7f7;
-    text-align: center;
-    margin-top: 30px;
-    margin: auto;
-    max-width: 70%; 
+
+.pricing-container {
+    display: flex;
+    justify-content: center; /* Centra gli elementi */
+    gap: 20px; /* Spazio tra le card */
+    flex-wrap: wrap;
+    max-width: 80%; /* Stessa larghezza dei container sopra e sotto */
+    margin: 0 auto; /* Centra il contenitore */
 }
+
+.pricing-section {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Media Query per rimuovere il flex: 1 sui tablet */
+@media (max-width: 1024px) and (min-width: 600px) {
+    .pricing-section {
+        flex: initial; /* Rimuove flex: 1 e ripristina il comportamento di default */
+    }
+}
+
 
 .pricing-section h2 {
     font-size: 24px;
@@ -437,6 +454,7 @@ body {
     padding: 20px;
     margin-top: 20px;
     text-align: left;
+    height: 600px;
 }
 
 .pricing-box ul {
@@ -488,10 +506,9 @@ body {
     flex-direction: row; /* Dispone gli elementi orizzontalmente */
     justify-content: center; /* Centra orizzontalmente gli elementi */
     flex-wrap: wrap; /* Permette il ritorno a capo se necessario */
-    background: var(--bg-light);
+    background: #f7f7f7;
     padding: 20px;
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 1000px;
     margin: auto;
     text-align: center; /* Centra il testo all'interno dei form */
@@ -501,7 +518,7 @@ body {
 
 .form-box {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
     max-width: 48%;
     padding: 20px;
     border: 1px solid #ccc;
@@ -514,22 +531,6 @@ body {
     margin-bottom: 15px;
     color: var(--text-dark);
     text-align: center;
-}
-
-.form-box label {
-    display: block;
-    font-size: 14px;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.form-box input, .form-box select, .form-box textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
-    font-size: 16px;
 }
 
 .form-box textarea {
@@ -551,14 +552,7 @@ body {
     transition: background 0.3s;
 }
 
-.form-box button:hover {
-    background: #0056b3;
-}
 
-.form-container input:focus, .form-container select:focus {
-    outline: none;
-    border-color: var(--text-dark);
-}
 
 .form-container button {
     background: var(--text-dark);
@@ -567,6 +561,7 @@ body {
 
 .form-container button:hover {
     background: var(--hover-bg);
+    color: #000;
 }
 
 /* Messaggio di feedback */
@@ -601,7 +596,7 @@ body {
 
 .social-icons a, .social-icons-pre a {
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     margin: 0 8px;
     display: inline-block;
     transition: color 0.3s, transform 0.3s;
@@ -702,3 +697,87 @@ a.mail-link:hover {
     100% { transform: rotate(360deg); }
 }
 
+
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group input, 
+.input-group select {
+    width: 100%;
+    padding: 14px 10px; /* Più padding per un look più pulito */
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background: transparent;
+}
+
+/* Stile base della label */
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #777;
+    transition: 0.3s ease-in-out;
+    pointer-events: none;
+    background: #f9f9f9;
+    padding: 0 5px;
+    border-radius: 40%;
+}
+
+/* Sposta la label a metà della riga superiore */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group input:not(:empty) + label,
+.input-group select:focus + label,
+.input-group select:valid + label {
+    top: -0.2px;  /* Modificato per essere più centrato */
+    left: 12px;
+    font-size: 16px; /* Non più troppo piccolo */
+    color: #007bff;
+}
+
+/* Stile focus per input e select */
+.input-group input:focus, 
+.input-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Media Queries per responsività */
+@media (max-width: 768px) {
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 12px 8px;  /* Ridurre il padding per schermi più piccoli */
+        font-size: 14px;    /* Ridurre la dimensione del testo */
+    }
+
+    .input-group label {
+        font-size: 16px; /* Ridurre la dimensione della label per dispositivi più piccoli */
+    }
+}
+
+@media (max-width: 480px) {
+    .input-group {
+        margin-bottom: 10px;
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 10px 6px;  /* Ridurre ulteriormente il padding */
+        font-size: 14px;    /* Mantieni la dimensione del testo più piccola */
+    }
+
+    .input-group label {
+        font-size: 14px; /* Etichetta più piccola su schermi molto piccoli */
+    }
+}
