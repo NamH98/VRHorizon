@@ -15,10 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
     loadingOverlay.id = "loadingOverlay";
     loadingOverlay.style.display = "none"; // 🔹 Nascondi appena si carica la pagina
     loadingOverlay.innerHTML = `
+    <div id="loadingOverlay">
         <div class="loading-content">
             <div class="spinner"></div>
             <p>Stiamo elaborando la tua prenotazione...</p>
         </div>
+    </div>
     `;
     document.body.appendChild(loadingOverlay);
 
